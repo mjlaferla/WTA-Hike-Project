@@ -1,2 +1,4 @@
 # WTA-Hike-Scraper
-Scrapes publicly available hike data from Washington Trail Association Website 
+This program scrapes publicly available hike data from Washington Trail Association website.
+
+Note: Yoshio Hasegawa was a major contributor and collaborator and wrote the intial code for this scraper https://github.com/YoshioHasegawa
