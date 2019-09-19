@@ -90,6 +90,8 @@ def get_hike_info(hike_urls):
     report_counts =[]
     report_dates = []
     hike_links =[]
+    longitudes = []
+    #latitudes = []
 
     rownum = 1
     for link in hike_urls:
@@ -136,7 +138,13 @@ def get_hike_info(hike_urls):
                 rating_count_string = hike_rows_list[itr1 + 1].lstrip()
                 rating_count = int(rating_count_string[rating_count_string.find('(') + 1 : rating_count_string.find(' vote')])
                 rating_counts.append(rating_count)
-
+                
+            if '"longitude"' in row1:
+                longitude_string = hike_rows_list[itr1 + 1].lstrip()
+                #longitude = float(longitude_string[longitude_string.find('"longitude": ') : longitude_string.find('}')])
+                longitudes.append(longitude_string)
+                
+                
         if len(titles) != rownum:
             titles.append(None)
 
@@ -160,7 +168,13 @@ def get_hike_info(hike_urls):
 
         if len(rating_counts) != rownum:
             rating_counts.append(None)
-
+            
+        if len(longitude) != rownum:
+            longitudes.append(None)
+            
+        #if len(latitudues) != rownum:
+            latitudes.append(None)
+ 
 
         report_link = link + '/@@related_tripreport_listing'
         report_rows_list = get_html_rows(report_link)
@@ -195,7 +209,7 @@ def get_hike_info(hike_urls):
 
     return pd.DataFrame({'TITLE': titles, 'REGION': regions, 'DISTANCE': distances, 'DIST_TYPE': dist_types,
                         'GAIN': gains, 'HIGHEST': highests, 'RATING': ratings, 'RATING_COUNT': rating_counts,
-                        'REPORT_DATE': report_dates, 'REPORT_COUNT': report_counts, 'LINK': hike_links})
+                        'REPORT_DATE': report_dates, 'REPORT_COUNT': report_counts, 'LINK': hike_links, 'LONGITUDES': longitudes})
 
 
 # format the returned data into a workable dataframe and write it to a csv
